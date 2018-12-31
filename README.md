@@ -119,6 +119,8 @@ I finally randomly shuffled the data set and put Y% of the data into a validatio
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting.
 
-The final video is as follows (Click on the image)
+The final video is as follows
+
+## Click on the image
 
 [![youtube](http://img.youtube.com/vi/Y9CZmBKPqws/0.jpg)](http://www.youtube.com/watch?v=Y9CZmBKPqws "CarND-Behavioral-Cloning")
