@@ -22,7 +22,9 @@ The goals / steps of this project are the following:
 [image2]: ./examples/center_2016_12_01_13_31_12_937.jpg "Grayscaling"
 [image3]: ./examples/left_2016_12_01_13_39_10_727.jpg "Recovery Image"
 [image4]: ./examples/right_2016_12_01_13_40_53_389.jpg "Recovery Image"
-
+[image5]: ./examples/recovery.jpg "Recovery Image"
+[image6]: ./examples/flipped_1.jpg "Flipped Image"
+[image7]: ./examples/flipped_2.jpg "Flipped Image"
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
 
@@ -91,9 +93,47 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
+The final model architecture (model.py lines 109-138) consisted of a convolution neural network with the following layers and layer sizes ...
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
+
+
+    _________________________________________________________________
+    Layer (type)                 Output Shape              Param #   
+    =================================================================
+    lambda_2 (Lambda)            (None, 160, 320, 3)       0         
+    _________________________________________________________________
+    cropping2d_2 (Cropping2D)    (None, 62, 320, 3)        0         
+    _________________________________________________________________
+    conv2d_6 (Conv2D)            (None, 29, 158, 24)       1824      
+    _________________________________________________________________
+    conv2d_7 (Conv2D)            (None, 13, 77, 36)        21636     
+    _________________________________________________________________
+    conv2d_8 (Conv2D)            (None, 5, 37, 48)         43248     
+    _________________________________________________________________
+    conv2d_9 (Conv2D)            (None, 3, 35, 64)         27712     
+    _________________________________________________________________
+    conv2d_10 (Conv2D)           (None, 1, 33, 64)         36928     
+    _________________________________________________________________
+    dropout_2 (Dropout)          (None, 1, 33, 64)         0         
+    _________________________________________________________________
+    flatten_2 (Flatten)          (None, 2112)              0         
+    _________________________________________________________________
+    dense_5 (Dense)              (None, 100)               211300    
+    _________________________________________________________________
+    dense_6 (Dense)              (None, 50)                5050      
+    _________________________________________________________________
+    dense_7 (Dense)              (None, 10)                510       
+    _________________________________________________________________
+    dense_8 (Dense)              (None, 1)                 11        
+    =================================================================
+    Total params: 348,219
+    Trainable params: 348,219
+    Non-trainable params: 0
+    _________________________________________________________________
+
+
+After training the following plot was observed:
 
 ![alt text][image1]
 
@@ -107,15 +147,18 @@ I then recorded the vehicle recovering from the left side and right sides of the
 
 ![alt text][image3]
 ![alt text][image4]
+![alt text][image5]
 
 Then I repeated this process on track two in order to get more data points.
 
-To augment the data sat, I also flipped images and angles thinking that this would make an unbiased model as the previous model contained left bias. 
+To augment the data sat, I also flipped images and angles thinking that this would make an unbiased model as the previous model contained left bias. For example, here is an image that has then been flipped:
 
+![alt text][image6]
+![alt text][image7]
 
 After the collection process, I had X number of data points. I then preprocessed this data by cropping image in the keras model itself. 
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
+I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting.
 
